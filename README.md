@@ -1,14 +1,14 @@
 ## How to reproduce it
 
-``sh
+```sh
 nix run github:bclaud/demo_bufferoverflow_error#default
-``
+```
 
 Server will start to listen on port 8000. As soon as a request is sended
 
-``sh
+```sh
 curl http://localhost:8000
-``
+```
 
 server shuts down with the following error
 ```sh

@@ -3,21 +3,11 @@ import uvicorn
 
 from demo_error.controllers.http import HelloController
 
-from litestar.contrib.opentelemetry import OpenTelemetryConfig
-from litestar.middleware.logging import LoggingMiddlewareConfig
-from litestar.config.compression import CompressionConfig
 
 
 def get_litestar_app() -> Litestar:
-    open_telemetry_config = OpenTelemetryConfig()
-    logging_middleware_config = LoggingMiddlewareConfig()
     litestar_app = Litestar(
         [HelloController],
-        compression_config=CompressionConfig(backend="gzip", gzip_compress_level=5),
-        middleware=[
-            open_telemetry_config.middleware,
-            logging_middleware_config.middleware,
-        ],
     )
     return litestar_app
 
