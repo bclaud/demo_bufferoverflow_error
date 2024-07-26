@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "demo-error"
+version = "0.1.0"
+description = ""
+authors = ["Bruno Claudino <bruarrais@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+uvicorn = "^0.30.1"
+httptools = "^0.6.1"
+litestar = {extras = ["opentelemetry"], version = "^2.9.1"}
+msgspec = "^0.18.6"
+httpx = "^0.27.0"
+httpcore = "^1.0.5"
+polyfactory = "^2.16.2"
+multidict = "^6.0.5"
+uvloop = "^0.19.0"
+python-dateutil = "^2.9.0.post0"
+certifi = "^2024.7.4"
+opentelemetry-instrumentation-asgi = "^0.46b0"
+fast-query-parsers = "^1.0.3"
+
+[tool.poetry.scripts]
+demo-error = 'demo_error.main:run'
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
