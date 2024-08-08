@@ -18,8 +18,8 @@
         inherit (poetry2nix.lib.mkPoetry2Nix { inherit pkgs; }) mkPoetryApplication mkPoetryEnv;
       in
       {
-        packages = {
-          demoError = mkPoetryApplication { projectDir = ./.; checkGroups = [];};
+        packages = rec {
+          demoError = mkPoetryApplication { projectDir = ./.; checkGroups = [ ]; };
           devDemoError = mkPoetryEnv {
             projectDir = ./.;
             editablePackageSources = {
@@ -27,7 +27,9 @@
             };
           };
           default = self.packages.${system}.demoError;
-          litestar = pkgs.callPackage ./litestar.nix { };
+          polyfactory = pkgs.callPackage ./polyfactory.nix { };
+          litestar = pkgs.callPackage ./litestar.nix { polyfactory = polyfactory; };
+          demoErrorBuildPythonApp = pkgs.callPackage ./default.nix { litestar = litestar; };
         };
 
         # Shell for app dependencies.
@@ -49,5 +51,7 @@
         devShells.poetry = pkgs.mkShell {
           packages = [ pkgs.poetry ];
         };
+
+        formatter = pkgs.nixpkgs-fmt;
       });
 }

@@ -1,10 +1,8 @@
-{
-  lib,
-  fetchFromGitHub,
-  # pythonOlder,
-  python312,
-
-  # build-system
+{ lib
+, fetchFromGitHub
+, # pythonOlder,
+  python312
+, # build-system
   # hatchling,
 
   # dependencies
@@ -15,8 +13,8 @@
   # importlib-resources,
   # msgspec,
   # multidict,
-  # polyfactory, missing
-  # pyyaml,
+  polyfactory
+, # pyyaml,
   # typing-extensions,
   # click,
   # rich,
@@ -27,7 +25,7 @@
   # pydantic,
   # pydantic-settings,
   # pydantic-extra-types,
- }:
+}:
 
 python312.pkgs.buildPythonPackage rec {
   pname = "litestar";
@@ -52,7 +50,7 @@ python312.pkgs.buildPythonPackage rec {
   dependencies = [
     python312.pkgs.anyio
     python312.pkgs.httpx
-    python312.pkgs.exceptiongroup 
+    python312.pkgs.exceptiongroup
     python312.pkgs.importlib-metadata
     python312.pkgs.importlib-resources
     python312.pkgs.msgspec
@@ -62,20 +60,21 @@ python312.pkgs.buildPythonPackage rec {
     python312.pkgs.click
     python312.pkgs.rich
     python312.pkgs.rich-click
+    polyfactory
   ];
 
   optional-dependencies.all =
-  [
-    python312.pkgs.uvicorn
-  ]
-  ++ lib.optionals (lib.versionAtLeast python312.pkgs.pydantic.version "2") [
-    python312.pkgs.pydantic-settings
-    python312.pkgs.pydantic-extra-types
-  ]
-  ++ python312.pkgs.uvicorn.optional-dependencies.standard;
+    [
+      python312.pkgs.uvicorn
+    ]
+    ++ lib.optionals (lib.versionAtLeast python312.pkgs.pydantic.version "2") [
+      python312.pkgs.pydantic-settings
+      python312.pkgs.pydantic-extra-types
+    ]
+    ++ python312.pkgs.uvicorn.optional-dependencies.standard;
 
   doCheck = false;
-  pythonImportsCheck = [];
+  pythonImportsCheck = [ ];
 
 }
 
