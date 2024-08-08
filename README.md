@@ -4,6 +4,12 @@
 nix run github:bclaud/demo_bufferoverflow_error#default
 ```
 
+Application is also available without `poetry2nix`. but the result still the same.
+
+```sh
+poetry run github:bclaud/demo_bufferoverflow_error#demoErrorBuildPythonApp
+```
+
 Server will start to listen on port 8000. As soon as a request is sended
 
 ```sh
