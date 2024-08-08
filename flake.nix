@@ -27,6 +27,7 @@
             };
           };
           default = self.packages.${system}.demoError;
+          litestar = pkgs.callPackage ./litestar.nix { };
         };
 
         # Shell for app dependencies.
