@@ -34,18 +34,9 @@ python312.pkgs.buildPythonPackage rec {
 
   # disabled = pythonOlder "3.7";
 
-  src = fetchFromGitHub {
-    owner = "litestar-org";
-    repo = "litestar";
-    rev = "refs/tags/${version}";
-    hash = "sha256-VDyM5BgircvIWe7Wo4Ysv5X1apF7cljUU13KBCGCBXE=";
-  };
+  src = ./litestar;
 
   build-system = [ python312.pkgs.hatchling ];
-
-  pythonRelaxDeps = [
-    "anyio"
-  ];
 
   dependencies = [
     python312.pkgs.anyio
