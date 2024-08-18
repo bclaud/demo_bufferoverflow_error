@@ -28,7 +28,7 @@
           };
           default = self.packages.${system}.demoError;
           polyfactory = pkgs.callPackage ./polyfactory.nix { };
-          litestar = pkgs.callPackage ./litestar.nix { polyfactory = polyfactory; };
+          litestar = pkgs.callPackage ./litestar-dep.nix { polyfactory = polyfactory; };
           demoErrorBuildPythonApp = pkgs.callPackage ./default.nix { litestar = litestar; };
         };
 
