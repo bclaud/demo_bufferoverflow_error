@@ -35,3 +35,34 @@ poetry run demo-error
 
 I already tried ``nix run --no-sandbox``.
 
+
+## Isolated issue
+
+the issue seems to be on msgspec lib.
+
+Specificaly when you try to encode any `int`. This results on buffer overflow
+
+buffer overflow:
+```python
+import msgspec
+
+msgspec.json.encode({'status_code': 500, 'detail': 'Internal Server Error'})
+```
+
+no error:
+
+```python
+import msgspec
+
+msgspec.json.encode({'anything': 'that is not a integer'})
+```
+
+however, it encodes for both yaml and toml
+
+```python
+>>> msgspec.yaml.encode({"a": "dict"})
+b'a: dict\n'
+>>> msgspec.yaml.encode({"a": 123})
+b'a: 123\n'
+>>>
+```
