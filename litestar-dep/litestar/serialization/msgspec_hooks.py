@@ -81,6 +81,7 @@ def default_serializer(value: Any, type_encoders: Mapping[Any, Callable[[Any], A
         TypeError: if value is not supported
     """
     type_encoders = {**DEFAULT_TYPE_ENCODERS, **(type_encoders or {})}
+    breakpoint()
 
     for base in value.__class__.__mro__[:-1]:
         try:
@@ -159,7 +160,11 @@ def encode_json(value: Any, serializer: Callable[[Any], Any] | None = None) -> b
         SerializationException: If error encoding ``obj``.
     """
     try:
-        return msgspec.json.encode(value, enc_hook=serializer) if serializer else _msgspec_json_encoder.encode(value)
+        breakpoint()
+        # FIXME DIG DIG DIG DIG DIG WTF
+        # THE PROBLEM IS HERE!!
+        result = msgspec.json.encode(value, enc_hook=serializer) if serializer else _msgspec_json_encoder.encode(value)
+        return result
     except (TypeError, msgspec.EncodeError) as msgspec_error:
         raise SerializationException(str(msgspec_error)) from msgspec_error
 

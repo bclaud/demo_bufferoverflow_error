@@ -12,7 +12,7 @@ def get_litestar_app() -> Litestar:
         [HelloController],
         # debug=True,
         # pdb_on_exception=True
-        exception_handlers={HTTPException: app_http_exception_handler, Exception: app_exception_handler}
+        # exception_handlers={HTTPException: app_http_exception_handler, Exception: app_exception_handler}
     )
     return litestar_app
 

@@ -439,6 +439,8 @@ class Litestar(Router):
             warn_pdb_on_exception()
 
         try:
+            # FIXME that is sus. What happends if i Provide starllet package?
+            # FIXME tried adding starllet but didn't change the result :(
             from starlette.exceptions import HTTPException as StarletteHTTPException
 
             from litestar.middleware._internal.exceptions.middleware import _starlette_exception_handler

@@ -389,6 +389,8 @@ class Response(Generic[T]):
             if MEDIA_TYPE_APPLICATION_JSON_PATTERN.match(
                 media_type,
             ):
+                # FIXME dig dig dig dig
+                breakpoint()
                 return encode_json(content, enc_hook)
 
             raise ImproperlyConfiguredException(f"unsupported media_type {media_type} for content {content!r}")
@@ -427,6 +429,7 @@ class Response(Generic[T]):
             An ASGIResponse instance.
         """
 
+        # FIXME dig dig dig
         if app is not None:
             warn_deprecation(
                 version="2.1",
@@ -446,9 +449,13 @@ class Response(Generic[T]):
 
         media_type = get_enum_string_value(self.media_type or media_type or MediaType.JSON)
 
+        breakpoint()
+        serializer = get_serializer(type_encoders)
+        body = self.render(self.content, media_type, serializer)
         return ASGIResponse(
             background=self.background or background,
-            body=self.render(self.content, media_type, get_serializer(type_encoders)),
+            # FIXME it's HERE!!
+            body=body,
             cookies=cookies,
             encoded_headers=encoded_headers,
             encoding=self.encoding,

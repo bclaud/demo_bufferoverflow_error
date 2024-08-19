@@ -68,6 +68,7 @@ def create_exception_response(request: Request[Any, Any, Any], exc: Exception) -
     Returns:
         Response: HTTP response constructed from exception details.
     """
+    # FIXME this func is important
     headers: dict[str, Any] | None
     extra: dict[str, Any] | list | None
 

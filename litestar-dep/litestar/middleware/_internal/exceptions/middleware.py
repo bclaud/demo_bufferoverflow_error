@@ -205,6 +205,9 @@ class ExceptionHandlerMiddleware:
         response = exception_handler(request, exc)
         route_handler: BaseRouteHandler | None = scope.get("route_handler")
         type_encoders = route_handler.resolve_type_encoders() if route_handler else litestar_app.type_encoders
+        # FIXME the problem might be here
+        # yes the problem is here. If I send a custom handler here, it works fine. But the default http_exception_handler does not work
+        breakpoint()
         await response.to_asgi_response(app=None, request=request, type_encoders=type_encoders)(
             scope=scope, receive=receive, send=send
         )
@@ -232,6 +235,8 @@ class ExceptionHandlerMiddleware:
         await send(event)
 
     def default_http_exception_handler(self, request: Request, exc: Exception) -> Response[Any]:
+        # FIXME default http_exception
+
         """Handle an HTTP exception by returning the appropriate response.
 
         Args:

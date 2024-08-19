@@ -52,6 +52,7 @@ python312.pkgs.buildPythonPackage rec {
     python312.pkgs.click
     python312.pkgs.rich
     python312.pkgs.rich-click
+    python312.pkgs.starlette
     polyfactory
   ];
 
